@@ -1,14 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WhatsApp Web Translator NODEJS</title>
+    <title>WhatsApp Web Translator</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <main>
-      <h1>WhatsApp Web Translator NODEJS</h1>
+      <h1>WhatsApp Web Translator</h1>
+
+      <label for="provider">Tradutor</label>
+      <select id="provider">
+        <option value="openai">OpenAI</option>
+        <option value="google">Google Cloud Translation</option>
+      </select>
+
+      <div id="openai-settings">
+        <label for="openai-api-key">Chave OpenAI</label>
+        <input id="openai-api-key" type="password" autocomplete="off" placeholder="sk-..." />
+
+        <label for="openai-model">Modelo OpenAI</label>
+        <input id="openai-model" type="text" autocomplete="off" />
+      </div>
+
+      <div id="google-settings" hidden>
+        <label for="google-api-key">Chave Google API</label>
+        <input id="google-api-key" type="password" autocomplete="off" placeholder="AIza..." />
+      </div>
 
       <label for="your-language">Seu Idioma</label>
       <select id="your-language"></select>

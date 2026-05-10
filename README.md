@@ -1,4 +1,4 @@
-# WhatsApp Web Translator NODEJS
+# WhatsApp Web Translator
 
 Extensao do Chrome que traduz o rascunho atual da mensagem no WhatsApp Web antes do envio.
 Ela tenta aplicar a traducao direto no campo e usa a area de transferencia como fallback.
@@ -7,20 +7,15 @@ Ela tenta aplicar a traducao direto no campo e usa a area de transferencia como 
 
 ## Instalacao
 
-1. Instale as dependencias com `npm install`.
-2. Gere o background empacotado com `npm run build`.
-3. Abra o Chrome e acesse `chrome://extensions`.
-4. Ative o **Modo do desenvolvedor**.
-5. Clique em **Carregar sem compactacao**.
-6. Selecione esta pasta do projeto.
-7. Abra o popup da extensao.
+1. Abra o Chrome e acesse `chrome://extensions`.
+2. Ative o **Modo do desenvolvedor**.
+3. Clique em **Carregar sem compactacao**.
+4. Selecione esta pasta do projeto.
+5. Abra o popup da extensao.
+6. Escolha OpenAI ou Google Cloud Translation.
+7. Informe a chave de API do provedor escolhido.
 8. Escolha seu idioma, escolha o idioma do contato e ative a traducao.
 9. Abra ou recarregue `https://web.whatsapp.com`.
-
-## Desenvolvimento
-
-Depois de alterar `src/background.js`, rode `npm run build` novamente para atualizar `dist/background.js`.
-Para visualizar o popup pelo navegador, rode `npm run preview` e abra `http://127.0.0.1:4173/popup.html`.
 
 ## Como usar
 
@@ -35,10 +30,13 @@ Ela nao usa APIs internas de envio do WhatsApp Web.
 
 ## Configuracoes
 
+- **Tradutor** escolhe entre OpenAI e Google Cloud Translation.
+- **Chave OpenAI** e **Chave Google API** salvam a chave usada pelo provedor escolhido.
+- **Modelo OpenAI** define o modelo usado quando o tradutor for OpenAI.
 - **Seu Idioma** define o idioma em que voce normalmente escreve.
 - **Idioma do Contato** define o idioma usado para traduzir o rascunho.
 - **Ativar Traducao** ativa ou pausa o atalho `Alt + T`.
 
 ## Traducao
 
-A extensao usa `@vitalets/google-translate-api` empacotado no background script. Essa biblioteca usa um endpoint nao oficial do Google Translate, entao pode haver limite de requisicoes ou mudancas futuras no servico.
+A extensao nao usa Node.js, build ou dependencias externas. Ela chama diretamente a API oficial da OpenAI ou a API oficial Google Cloud Translation pelo `background.js` da extensao.

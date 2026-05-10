@@ -91,10 +91,25 @@ select {
   outline: none;
 }
 
+input::placeholder {
+  color: var(--placeholder);
+}
+
 input:focus,
 select:focus {
   border-color: var(--focus);
   box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+#openai-settings,
+#google-settings {
+  display: grid;
+  gap: 8px;
+}
+
+#openai-settings[hidden],
+#google-settings[hidden] {
+  display: none;
 }
 
 .setting-row {
