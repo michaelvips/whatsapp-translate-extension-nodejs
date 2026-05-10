@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WhatsApp Translator NodeJS NodeJs</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>WhatsApp Translator NodeJS</h1>
+
+      <label for="your-language">Seu Idioma</label>
+      <select id="your-language">
+        <option value="Portuguese">Português</option>
+        <option value="English">Inglês (English)</option>
+        <option value="Spanish">Espanhol (Español)</option>
+        <option value="French">Francês (Français)</option>
+        <option value="German">Alemão (Deutsch)</option>
+        <option value="Italian">Italiano (Italiano)</option>
+        <option value="Japanese">Japonês (日本語)</option>
+        <option value="Korean">Coreano (한국어)</option>
+        <option value="Mandarin Chinese">Chinês Mandarim (中文)</option>
+        <option value="Arabic">Árabe (العربية)</option>
+      </select>
+
+      <label for="contact-language">Idioma do Contato</label>
+      <select id="contact-language">
+        <option value="English">Inglês (English)</option>
+        <option value="Portuguese">Português</option>
+        <option value="Spanish">Espanhol (Español)</option>
+        <option value="French">Francês (Français)</option>
+        <option value="German">Alemão (Deutsch)</option>
+        <option value="Italian">Italiano (Italiano)</option>
+        <option value="Japanese">Japonês (日本語)</option>
+        <option value="Korean">Coreano (한국어)</option>
+        <option value="Mandarin Chinese">Chinês Mandarim (中文)</option>
+        <option value="Arabic">Árabe (العربية)</option>
+      </select>
+
+      <div class="setting-row">
+        <span id="translation-enabled-label">Ativar Tradução</span>
+        <label class="switch" aria-labelledby="translation-enabled-label">
+          <input id="translation-enabled" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="usage-card">
+        <strong>Como usar</strong>
+        <ol>
+          <li>Digite a mensagem no WhatsApp Web.</li>
+          <li>Pressione <kbd>Alt</kbd> + <kbd>T</kbd>.</li>
+          <li>Cole com <kbd>Ctrl</kbd> + <kbd>V</kbd> e revise antes de enviar.</li>
+        </ol>
+      </div>
+
+      <button id="save" type="button">Salvar</button>
+      <p id="status" aria-live="polite"></p>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
