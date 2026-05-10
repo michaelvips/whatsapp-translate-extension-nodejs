@@ -3,6 +3,8 @@
 Extensao do Chrome que traduz o rascunho atual da mensagem no WhatsApp Web antes do envio.
 Ela usa um fluxo baseado na area de transferencia para que voce possa revisar o texto traduzido antes de enviar.
 
+<img src="docs/popup-screenshot.png" alt="Popup da extensao WhatsApp Translator" width="75%" height="75%">
+
 ## Instalacao
 
 1. Instale as dependencias com `npm install`.
