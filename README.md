@@ -20,6 +20,7 @@ Ela usa um fluxo baseado na area de transferencia para que voce possa revisar o 
 ## Desenvolvimento
 
 Depois de alterar `src/background.js`, rode `npm run build` novamente para atualizar `dist/background.js`.
+Para visualizar o popup pelo navegador, rode `npm run preview` e abra `http://127.0.0.1:4173/popup.html`.
 
 ## Como usar
 
