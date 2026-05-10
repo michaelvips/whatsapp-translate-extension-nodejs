@@ -1,13 +1,37 @@
-const DEFAULT_YOUR_LANGUAGE = "Portuguese";
-const DEFAULT_CONTACT_LANGUAGE = "English";
+import {
+  DEFAULT_CONTACT_LANGUAGE,
+  DEFAULT_YOUR_LANGUAGE,
+  LANGUAGES
+} from "./src/languages.js";
+
 const yourLanguageSelect = document.getElementById("your-language");
 const contactLanguageSelect = document.getElementById("contact-language");
 const translationEnabledInput = document.getElementById("translation-enabled");
 const saveButton = document.getElementById("save");
 const statusText = document.getElementById("status");
 
-document.addEventListener("DOMContentLoaded", restoreSettings);
+document.addEventListener("DOMContentLoaded", initializePopup);
 saveButton.addEventListener("click", saveSettings);
+
+async function initializePopup() {
+  fillLanguageSelect(yourLanguageSelect, DEFAULT_YOUR_LANGUAGE);
+  fillLanguageSelect(contactLanguageSelect, DEFAULT_CONTACT_LANGUAGE);
+  await restoreSettings();
+}
+
+function fillLanguageSelect(select, preferredLanguage) {
+  const sortedLanguages = [
+    ...LANGUAGES.filter(({ value }) => value === preferredLanguage),
+    ...LANGUAGES.filter(({ value }) => value !== preferredLanguage)
+  ];
+
+  select.replaceChildren(...sortedLanguages.map((language) => {
+    const option = document.createElement("option");
+    option.value = language.value;
+    option.textContent = language.label;
+    return option;
+  }));
+}
 
 async function restoreSettings() {
   const {

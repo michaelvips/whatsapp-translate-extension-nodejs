@@ -1,7 +1,7 @@
-# Tradutor para WhatsApp Web
+# WhatsApp Web Translator NODEJS
 
 Extensao do Chrome que traduz o rascunho atual da mensagem no WhatsApp Web antes do envio.
-Ela usa um fluxo baseado na area de transferencia para que voce possa revisar o texto traduzido antes de enviar.
+Ela tenta aplicar a traducao direto no campo e usa a area de transferencia como fallback.
 
 <img src="docs/popup-screenshot.png" alt="Popup da extensao WhatsApp Translator">
 
@@ -26,10 +26,9 @@ Para visualizar o popup pelo navegador, rode `npm run preview` e abra `http://12
 
 1. Digite uma mensagem no WhatsApp Web.
 2. Pressione `Alt + T`.
-3. A extensao copia o texto traduzido para a area de transferencia.
-4. A extensao limpa o campo da mensagem quando o WhatsApp permite.
-5. Pressione `Ctrl + V` no campo da mensagem.
-6. Revise o texto e envie manualmente.
+3. A extensao tenta substituir o rascunho pela traducao diretamente no campo.
+4. Se o WhatsApp bloquear a substituicao direta, a traducao sera copiada para a area de transferencia.
+5. Revise o texto e envie manualmente.
 
 A extensao nao envia mensagens automaticamente.
 Ela nao usa APIs internas de envio do WhatsApp Web.

@@ -3,40 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WhatsApp Translator NodeJS NodeJs</title>
+    <title>WhatsApp Web Translator NODEJS</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <main>
-      <h1>WhatsApp Translator NodeJS</h1>
+      <h1>WhatsApp Web Translator NODEJS</h1>
 
       <label for="your-language">Seu Idioma</label>
-      <select id="your-language">
-        <option value="Portuguese">Português</option>
-        <option value="English">Inglês (English)</option>
-        <option value="Spanish">Espanhol (Español)</option>
-        <option value="French">Francês (Français)</option>
-        <option value="German">Alemão (Deutsch)</option>
-        <option value="Italian">Italiano (Italiano)</option>
-        <option value="Japanese">Japonês (日本語)</option>
-        <option value="Korean">Coreano (한국어)</option>
-        <option value="Mandarin Chinese">Chinês Mandarim (中文)</option>
-        <option value="Arabic">Árabe (العربية)</option>
-      </select>
+      <select id="your-language"></select>
 
       <label for="contact-language">Idioma do Contato</label>
-      <select id="contact-language">
-        <option value="English">Inglês (English)</option>
-        <option value="Portuguese">Português</option>
-        <option value="Spanish">Espanhol (Español)</option>
-        <option value="French">Francês (Français)</option>
-        <option value="German">Alemão (Deutsch)</option>
-        <option value="Italian">Italiano (Italiano)</option>
-        <option value="Japanese">Japonês (日本語)</option>
-        <option value="Korean">Coreano (한국어)</option>
-        <option value="Mandarin Chinese">Chinês Mandarim (中文)</option>
-        <option value="Arabic">Árabe (العربية)</option>
-      </select>
+      <select id="contact-language"></select>
 
       <div class="setting-row">
         <span id="translation-enabled-label">Ativar Tradução</span>
@@ -51,7 +29,7 @@
         <ol>
           <li>Digite a mensagem no WhatsApp Web.</li>
           <li>Pressione <kbd>Alt</kbd> + <kbd>T</kbd>.</li>
-          <li>Cole com <kbd>Ctrl</kbd> + <kbd>V</kbd> e revise antes de enviar.</li>
+          <li>Revise a tradução no campo antes de enviar.</li>
         </ol>
       </div>
 
@@ -59,6 +37,6 @@
       <p id="status" aria-live="polite"></p>
     </main>
 
-    <script src="popup.js"></script>
+    <script type="module" src="popup.js"></script>
   </body>
 </html>

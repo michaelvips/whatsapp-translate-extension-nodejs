@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "WhatsApp Web Translator",
+  "name": "WhatsApp Web Translator NODEJS",
   "description": "Translate the WhatsApp Web message composer before sending.",
   "version": "1.0.0",
   "permissions": ["storage", "clipboardWrite"],
@@ -9,7 +9,7 @@
     "https://translate.google.com/*"
   ],
   "action": {
-    "default_title": "WhatsApp Translator NodeJS",
+    "default_title": "WhatsApp Web Translator NODEJS",
     "default_popup": "popup.html"
   },
   "background": {

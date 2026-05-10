@@ -545,36 +545,49 @@
     }
   };
 
-  // src/background.js
-  var DEFAULT_CONTACT_LANGUAGE = "English";
+  // src/languages.js
   var DEFAULT_YOUR_LANGUAGE = "Portuguese";
-  var LANGUAGE_CODES = {
-    "Portuguese": "pt",
-    "English": "en",
-    "Spanish": "es",
-    "French": "fr",
-    "German": "de",
-    "Italian": "it",
-    "Japanese": "ja",
-    "Korean": "ko",
-    "Mandarin Chinese": "zh-CN",
-    "Arabic": "ar"
-  };
+  var DEFAULT_CONTACT_LANGUAGE = "English";
+  var LANGUAGES = [
+    { value: "Portuguese", label: "Portugu\xEAs", code: "pt" },
+    { value: "English", label: "Ingl\xEAs (English)", code: "en" },
+    { value: "Spanish", label: "Espanhol (Espa\xF1ol)", code: "es" },
+    { value: "French", label: "Franc\xEAs (Fran\xE7ais)", code: "fr" },
+    { value: "German", label: "Alem\xE3o (Deutsch)", code: "de" },
+    { value: "Italian", label: "Italiano (Italiano)", code: "it" },
+    { value: "Japanese", label: "Japon\xEAs (\u65E5\u672C\u8A9E)", code: "ja" },
+    { value: "Korean", label: "Coreano (\uD55C\uAD6D\uC5B4)", code: "ko" },
+    { value: "Mandarin Chinese", label: "Chin\xEAs Mandarim (\u4E2D\u6587)", code: "zh-CN" },
+    { value: "Arabic", label: "\xC1rabe (\u0627\u0644\u0639\u0631\u0628\u064A\u0629)", code: "ar" }
+  ];
+  function getLanguageCode(language, fallbackLanguage) {
+    const candidate = String(language || "").trim();
+    return findLanguage(candidate)?.code || findLanguage(fallbackLanguage)?.code;
+  }
+  function findLanguage(language) {
+    return LANGUAGES.find(({ value }) => value === language);
+  }
+
+  // src/background.js
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (!message || message.type !== "TRANSLATE_TEXT") {
       return false;
     }
     translateMessage(message.text).then((translatedText) => {
       sendResponse({ ok: true, translatedText });
-    }).catch(() => {
+    }).catch((error) => {
       sendResponse({
         ok: false,
-        error: "Falha ao traduzir. Tente novamente."
+        error: getFriendlyTranslationError(error)
       });
     });
     return true;
   });
   async function translateMessage(text) {
+    const normalizedText = String(text || "").trim();
+    if (!normalizedText) {
+      throw new Error("EMPTY_TEXT");
+    }
     const {
       targetLanguage,
       yourLanguage,
@@ -586,19 +599,35 @@
     });
     const sourceLanguage = getLanguageCode(yourLanguage, DEFAULT_YOUR_LANGUAGE);
     const language = getLanguageCode(contactLanguage || targetLanguage, DEFAULT_CONTACT_LANGUAGE);
-    const result = await translate(String(text || ""), {
+    const result = await translate(normalizedText, {
       from: sourceLanguage,
       to: language
     });
     const translatedText = String(result?.text || "").trim();
     if (!translatedText) {
-      throw new Error("Empty translation.");
+      throw new Error("EMPTY_TRANSLATION");
     }
     return translatedText;
   }
-  function getLanguageCode(language, fallbackLanguage) {
-    const candidate = String(language || "").trim();
-    return LANGUAGE_CODES[candidate] || LANGUAGE_CODES[fallbackLanguage];
+  function getFriendlyTranslationError(error) {
+    const message = error instanceof Error ? error.message : String(error || "");
+    const lowerMessage = message.toLowerCase();
+    if (message === "EMPTY_TEXT") {
+      return "Digite uma mensagem antes de traduzir.";
+    }
+    if (message === "EMPTY_TRANSLATION") {
+      return "O tradutor n\xE3o retornou texto. Tente reformular a mensagem.";
+    }
+    if (lowerMessage.includes("failed to fetch") || lowerMessage.includes("networkerror")) {
+      return "N\xE3o consegui acessar o servi\xE7o de tradu\xE7\xE3o. Verifique sua conex\xE3o.";
+    }
+    if (lowerMessage.includes("too many requests") || lowerMessage.includes("429")) {
+      return "O servi\xE7o de tradu\xE7\xE3o limitou as tentativas. Aguarde um pouco e tente novamente.";
+    }
+    if (lowerMessage.includes("403") || lowerMessage.includes("blocked")) {
+      return "O servi\xE7o de tradu\xE7\xE3o bloqueou a solicita\xE7\xE3o no momento. Tente novamente mais tarde.";
+    }
+    return "Falha ao traduzir. Tente novamente em alguns instantes.";
   }
 })();
 /*! Bundled license information:

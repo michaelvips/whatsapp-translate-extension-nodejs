@@ -63,6 +63,12 @@ async function translateCurrentDraft() {
       throw new Error(response?.error || "Translation failed.");
     }
 
+    const replaced = await replaceComposerText(composer, response.translatedText);
+    if (replaced) {
+      showToast("Tradução aplicada. Revise antes de enviar.");
+      return;
+    }
+
     const copied = await copyTextToClipboard(response.translatedText);
     const cleared = copied ? await clearComposerText(composer) : false;
     showToast(
@@ -204,6 +210,20 @@ async function clearComposerText(composer) {
 
   await waitForEditor();
   return !getComposerText(composer).trim();
+}
+
+async function replaceComposerText(composer, text) {
+  composer.focus();
+  selectComposerContents(composer);
+  document.execCommand("insertText", false, text);
+  notifyComposerChanged(composer, "insertText", text);
+
+  await waitForEditor();
+  return normalizeComposerText(getComposerText(composer)) === normalizeComposerText(text);
+}
+
+function normalizeComposerText(text) {
+  return String(text || "").replace(/\u00a0/g, " ").trim();
 }
 
 function selectComposerContents(composer) {
