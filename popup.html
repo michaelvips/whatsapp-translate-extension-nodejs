@@ -21,7 +21,7 @@
         <input id="openai-api-key" type="password" autocomplete="off" placeholder="sk-..." />
 
         <label for="openai-model">Modelo OpenAI</label>
-        <input id="openai-model" type="text" autocomplete="off" />
+        <input id="openai-model" type="text" autocomplete="off" placeholder="gpt-4.1-mini" />
       </div>
 
       <div id="google-settings" hidden>
@@ -38,18 +38,15 @@
       <div class="setting-row">
         <span id="translation-enabled-label">Ativar Tradução</span>
         <label class="switch" aria-labelledby="translation-enabled-label">
-          <input id="translation-enabled" type="checkbox" />
+          <input id="translation-enabled" type="checkbox" checked />
           <span class="slider"></span>
         </label>
       </div>
 
       <div class="usage-card">
         <strong>Como usar</strong>
-        <ol>
-          <li>Digite a mensagem no WhatsApp Web.</li>
-          <li>Pressione <kbd>Alt</kbd> + <kbd>T</kbd>.</li>
-          <li>Revise a tradução no campo antes de enviar.</li>
-        </ol>
+        <p>Atalho: <kbd>Alt</kbd> + <kbd>T</kbd></p>
+        <p>Revise a tradução antes de enviar.</p>
       </div>
 
       <button id="save" type="button">Salvar</button>
